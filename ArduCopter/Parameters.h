@@ -268,6 +268,9 @@ public:
         k_param_flight_mode4,
         k_param_flight_mode5,
         k_param_flight_mode6,
+		k_param_flight_mode7,
+		k_param_flight_mode8,
+		k_param_flight_mode9,
         k_param_simple_modes,
 
         //
@@ -312,6 +315,8 @@ public:
         k_param_acro_balance_pitch,
         k_param_acro_yaw_p, // 244
 
+		k_param_flight_mode_channel = 250,
+		k_param_flight_mode_channel2 = 251,
         // 254,255: reserved
     };
 
@@ -379,7 +384,12 @@ public:
     AP_Int8         flight_mode4;
     AP_Int8         flight_mode5;
     AP_Int8         flight_mode6;
+	AP_Int8         flight_mode7;
+	AP_Int8         flight_mode8;
+	AP_Int8         flight_mode9;
     AP_Int8         simple_modes;
+	AP_Int8 flight_mode_channel;
+	AP_Int8 flight_mode_channel2;
 
     // Misc
     //

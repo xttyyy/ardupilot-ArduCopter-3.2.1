@@ -346,12 +346,40 @@ const AP_Param::Info var_info[] PROGMEM = {
     // @User: Standard
     GSCALAR(flight_mode6, "FLTMODE6",               FLIGHT_MODE_6),
 
+	// @Param: FLTMODE6
+	// @DisplayName: Flight Mode 7
+	// @Description: Flight mode when Channel 5 pwm is >=1750
+	// @Values: 0:Stabilize,1:Acro,2:AltHold,3:Auto,4:Guided,5:Loiter,6:RTL,7:Circle,9:Land,10:OF_Loiter,11:Drift,13:Sport,16:PosHold
+	// @User: Standard
+	GSCALAR(flight_mode7, "FLTMODE7", FLIGHT_MODE_7),
+
+	// @Param: FLTMODE6
+	// @DisplayName: Flight Mode 8
+	// @Description: Flight mode when Channel 5 pwm is >=1750
+	// @Values: 0:Stabilize,1:Acro,2:AltHold,3:Auto,4:Guided,5:Loiter,6:RTL,7:Circle,9:Land,10:OF_Loiter,11:Drift,13:Sport,16:PosHold
+	// @User: Standard
+	GSCALAR(flight_mode8, "FLTMODE8", FLIGHT_MODE_8),
+
+	// @Param: FLTMODE6
+	// @DisplayName: Flight Mode 9
+	// @Description: Flight mode when Channel 5 pwm is >=1750
+	// @Values: 0:Stabilize,1:Acro,2:AltHold,3:Auto,4:Guided,5:Loiter,6:RTL,7:Circle,9:Land,10:OF_Loiter,11:Drift,13:Sport,16:PosHold
+	// @User: Standard
+	GSCALAR(flight_mode9, "FLTMODE9", FLIGHT_MODE_9),
+
     // @Param: SIMPLE
     // @DisplayName: Simple mode bitmask
     // @Description: Bitmask which holds which flight modes use simple heading mode (eg bit 0 = 1 means Flight Mode 0 uses simple mode)
     // @User: Advanced
     GSCALAR(simple_modes, "SIMPLE",                 0),
 
+	// @Param: FLTMODE_CH
+	// @DisplayName: Flightmode channel
+	// @Description: RC Channel to use for flight mode control
+	// @User: Advanced
+	GSCALAR(flight_mode_channel, "FLTMODE_CH", FLIGHT_MODE_CHANNEL),
+
+	GSCALAR(flight_mode_channel2, "FLTMODE_CH2", FLIGHT_MODE_CHANNEL2),
     // @Param: LOG_BITMASK
     // @DisplayName: Log bitmask
     // @Description: 4 byte bitmap of log types to enable

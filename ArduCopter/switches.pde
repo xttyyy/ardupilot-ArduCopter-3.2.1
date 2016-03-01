@@ -21,11 +21,15 @@ static void read_control_switch()
                 if(g.ch7_option != AUX_SWITCH_SIMPLE_MODE && g.ch8_option != AUX_SWITCH_SIMPLE_MODE && g.ch7_option != AUX_SWITCH_SUPERSIMPLE_MODE && g.ch8_option != AUX_SWITCH_SUPERSIMPLE_MODE) {
                     // set Simple mode using stored paramters from Mission planner
                     // rather than by the control switch
-                    if (BIT_IS_SET(g.super_simple, switchPosition)) {
-                        set_simple_mode(2);
-                    }else{
-                        set_simple_mode(BIT_IS_SET(g.simple_modes, switchPosition));
-                    }
+					if (switchPosition <= 7)  //针对第九飞行模式的super和simple设置无效
+					{
+						if (BIT_IS_SET(g.super_simple, switchPosition)) {
+							set_simple_mode(2);
+						}
+						else{
+							set_simple_mode(BIT_IS_SET(g.simple_modes, switchPosition));
+						}
+					}
                 }
             }
 
@@ -38,14 +42,65 @@ static void read_control_switch()
 }
 
 static uint8_t readSwitch(void){
-    int16_t pulsewidth = g.rc_5.radio_in;   // default for Arducopter
+    //int16_t pulsewidth = g.rc_5.radio_in;   // default for Arducopter
 
-    if (pulsewidth < 1231) return 0;
-    if (pulsewidth < 1361) return 1;
-    if (pulsewidth < 1491) return 2;
-    if (pulsewidth < 1621) return 3;
-    if (pulsewidth < 1750) return 4;        // Software Manual
-    return 5;                               // Hardware Manual
+    //if (pulsewidth < 1231) return 0;
+    //if (pulsewidth < 1361) return 1;
+    //if (pulsewidth < 1491) return 2;
+    //if (pulsewidth < 1621) return 3;
+    //if (pulsewidth < 1750) return 4;        // Software Manual
+    //return 5;                               // Hardware Manual
+
+	uint16_t pulsewidth = hal.rcin->read(g.flight_mode_channel - 1);
+	uint16_t pulsewidth2 = hal.rcin->read(g.flight_mode_channel2 - 1);
+	if (pulsewidth <= 900 || pulsewidth >= 2200) return 255;
+	if (pulsewidth2 <= 900 || pulsewidth >= 2200) return 255;
+	if (pulsewidth < 1300)
+	{
+		if (pulsewidth2 < 1300)
+		{
+			return 0;
+		}
+		else if (pulsewidth2 < 1700)
+		{
+			return 1;
+		}
+		else
+		{
+			return 2;
+		}
+	}
+	else if (pulsewidth < 1700)
+	{
+		if (pulsewidth2 < 1300)
+		{
+			return 3;
+		}
+		else if (pulsewidth2 < 1700)
+		{
+			return 4;
+		}
+		else
+		{
+			return 5;
+		}
+	}
+	else
+	{
+		if (pulsewidth2 < 1300)
+		{
+			return 6;
+		}
+		else if (pulsewidth2 < 1700)
+		{
+			return 7;
+		}
+		else
+		{
+			return 7;
+		}
+	}
+	return 0;
 }
 
 static void reset_control_switch()
