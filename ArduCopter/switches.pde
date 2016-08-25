@@ -51,8 +51,8 @@ static uint8_t readSwitch(void){
     //if (pulsewidth < 1750) return 4;        // Software Manual
     //return 5;                               // Hardware Manual
 
-	uint16_t pulsewidth = hal.rcin->read(g.flight_mode_channel - 1);
-	uint16_t pulsewidth2 = hal.rcin->read(g.flight_mode_channel2 - 1);
+	uint16_t pulsewidth = hal.rcin->read(4);
+	uint16_t pulsewidth2 = hal.rcin->read(5);
 	if (pulsewidth <= 900 || pulsewidth >= 2200) return 255;
 	if (pulsewidth2 <= 900 || pulsewidth >= 2200) return 255;
 	if (pulsewidth < 1300)
@@ -97,7 +97,7 @@ static uint8_t readSwitch(void){
 		}
 		else
 		{
-			return 7;
+			return 8;
 		}
 	}
 	return 0;
